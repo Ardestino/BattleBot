@@ -1,0 +1,21 @@
+site_name: BattleBot Hércules
+site_description: Robot de combate de 3 kg para BotCrash CETI 2026A
+site_author: Jose Ramon Navarro
+docs_dir: docs
+theme:
+  name: material
+  language: es
+  palette:
+    - scheme: slate
+      primary: black
+      accent: amber
+nav:
+  - Inicio: index.md
+  - Reglamento: reglamento.md
+  - Diseño:
+      - Presupuesto de peso: diseno/presupuesto-peso.md
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.tasklist:
+      custom_checkbox: true

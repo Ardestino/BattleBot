@@ -1,0 +1,18 @@
+Diseños de hardware y documentación
+====================================
+
+Copyright (c) 2026 Jose Ramon Navarro
+
+Los archivos de las carpetas hardware/ y docs/ (modelos CAD, archivos para
+impresión y corte, diagramas, renders y documentación) se publican bajo la
+licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional
+(CC BY-SA 4.0).
+
+Puedes copiar, modificar y fabricar estos diseños, incluso con fines
+comerciales, siempre que:
+  - des crédito al autor original e indiques si hiciste cambios, y
+  - publiques tus versiones modificadas bajo esta misma licencia.
+
+Texto legal completo: https://creativecommons.org/licenses/by-sa/4.0/legalcode.es
+
+El código fuente (firmware/ y tools/) se rige por el archivo LICENSE (MIT).

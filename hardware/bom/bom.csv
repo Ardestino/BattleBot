@@ -1,0 +1,15 @@
+pieza,cantidad,descripcion,material,peso_unitario_g,costo_unitario_mxn,proveedor,estado
+Motorreductor JGA25-370,4,"12 V, 170 RPM, con encoder Hall, eje D de 4 mm",,95,,,disponible
+Rueda de goma 65 mm,4,"Rin de plástico amarillo, aprox. 65 x 27 mm (por medir)",Goma/plástico,35,,,disponible
+Motor del arma 24 V,1,Motor recuperado de podadora eléctrica (datos por medir),,,,,disponible
+Batería 3S Li-ion,1,"Celdas de taladro con BMS de 3 celdas (tracción y electrónica)",Li-ion,160,,,disponible
+Batería 5S Li-ion,1,Celdas de taladro (arma),Li-ion,265,,,disponible
+ESP32-S3,1,Controlador y receptor Bluetooth,,10,,,disponible
+Control Xbox Series X,1,Control por BLE (no va en el robot),,,,,disponible
+Relevador del arma,1,Por definir (automotriz ≥ 40 A o MOSFET),,,,,por comprar
+Controlador de motores de tracción,1,Por definir (2 canales para motores con escobillas),,,,,por comprar
+Interruptor general,1,Llave de seguridad accesible desde fuera,,,,,por comprar
+Interruptor del arma,1,Conector o llave removible en serie con la batería 5S,,,,,por comprar
+Fusibles,2,Uno por batería,,,,,por comprar
+Disco del arma,1,"Ø130 mm, acero templado",Acero,550,,,por fabricar
+Placa base,1,"200 x 220 mm, aligerada",Aluminio 6061 3 mm,300,,,por fabricar
