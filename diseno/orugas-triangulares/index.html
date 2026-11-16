@@ -1,0 +1,933 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Robot de combate de 3 kg para BotCrash CETI 2026A">
+      
+      
+        <meta name="author" content="Jose Ramon Navarro">
+      
+      
+      
+        <link rel="prev" href="../presupuesto-peso/">
+      
+      
+        <link rel="next" href="../ensamble-ejemplo/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Orugas triangulares - BattleBot Hércules</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#orugas-triangulares-impresas" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="BattleBot Hércules" class="md-header__button md-logo" aria-label="BattleBot Hércules" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BattleBot Hércules
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Orugas triangulares
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BattleBot Hércules" class="md-nav__button md-logo" aria-label="BattleBot Hércules" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    BattleBot Hércules
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reglamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reglamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diseño
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Diseño
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../presupuesto-peso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presupuesto de peso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orugas triangulares
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orugas triangulares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#geometria-propuesta-punto-de-partida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometría propuesta (punto de partida)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opciones-de-construccion-de-la-oruga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opciones de construcción de la oruga
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#riesgos-que-hay-que-resolver-antes-de-modelar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Riesgos que hay que resolver antes de modelar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informacion-que-falta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Información que falta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ensamble-ejemplo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ensamble de ejemplo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../impresion-3d/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Impresión 3D
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electrónica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Electrónica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../electronica/arquitectura-electrica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura eléctrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#geometria-propuesta-punto-de-partida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometría propuesta (punto de partida)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opciones-de-construccion-de-la-oruga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opciones de construcción de la oruga
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#riesgos-que-hay-que-resolver-antes-de-modelar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Riesgos que hay que resolver antes de modelar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informacion-que-falta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Información que falta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="orugas-triangulares-impresas">Orugas triangulares impresas</h1>
+<p>Reemplazan al kit de ruedas mecanum. Es una oruga de perfil triangular por lado: la rueda motriz
+(catarina) arriba y dos ruedas tensoras abajo, con tracción diferencial (un motor JGB37-520 por lado).
+El reglamento permite orugas ("ruedas u orugas, con control direccional efectivo").</p>
+<blockquote>
+<p>El diseño es propio. Se toma la idea mecánica general de la oruga triangular (común en tanques,
+maquinaria y robots), no la apariencia de ningún personaje.</p>
+</blockquote>
+<p>Estado: <strong>recabando información, sin modelar.</strong></p>
+<h2 id="geometria-propuesta-punto-de-partida">Geometría propuesta (punto de partida)</h2>
+<pre><code>            (catarina motriz, eje del JGB37-520)
+                     /\
+                    /  \
+                   /    \
+                  /      \
+       (tensora) O--------O (tensora, con ranura para tensar)
+                 ==========  suelo
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Valor inicial</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Separación entre tensoras (largo de apoyo)</td>
+<td>≈160 mm</td>
+<td>Da estabilidad; deja lugar al arma dentro de 300 mm</td>
+</tr>
+<tr>
+<td>Altura de la catarina sobre las tensoras</td>
+<td>≈90 mm</td>
+<td>Sube el motor, lo aleja del piso y de los golpes bajos</td>
+</tr>
+<tr>
+<td>Paso del eslabón</td>
+<td>12–15 mm</td>
+<td>Rango usado en orugas impresas de este tamaño</td>
+</tr>
+<tr>
+<td>Catarina</td>
+<td>10–12 dientes, diámetro primitivo ≈45–50 mm</td>
+<td>Con menos de ~9 dientes la oruga golpetea (efecto poligonal)</td>
+</tr>
+<tr>
+<td>Ancho de la oruga</td>
+<td>≈30 mm</td>
+<td>Por definir con el peso</td>
+</tr>
+<tr>
+<td>Largo de la oruga</td>
+<td>≈540 mm (≈36–40 eslabones)</td>
+<td>Perímetro del triángulo más el arco de las ruedas</td>
+</tr>
+<tr>
+<td>Velocidad</td>
+<td>≈0.8 m/s (catarina de 47 mm a 333 RPM, sin carga)</td>
+<td>v = π · d · RPM / 60</td>
+</tr>
+<tr>
+<td>Rodamientos de las tensoras</td>
+<td>625ZZ (5 × 16 × 5 mm) o 608ZZ (8 × 22 × 7 mm)</td>
+<td>625 es más ligero; 608 es más fácil de conseguir</td>
+</tr>
+<tr>
+<td>Unión catarina-eje</td>
+<td>Barreno en D de 6 mm + prisionero M3 con tuerca embutida, o cubo de aluminio de 6 mm</td>
+<td>El eje del motor es de 6 mm con plano a 5.5 mm</td>
+</tr>
+<tr>
+<td>Tensado</td>
+<td>Una tensora en ranura con tornillo de ajuste</td>
+<td>Una oruga floja se sale en los giros</td>
+</tr>
+</tbody>
+</table>
+<p>Todas son medidas iniciales para discutir. Se fijan cuando tengamos el motor del arma y el
+acomodo general dentro de 300 × 300 × 300 mm.</p>
+<h2 id="opciones-de-construccion-de-la-oruga">Opciones de construcción de la oruga</h2>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Cómo es</th>
+<th>A favor</th>
+<th>En contra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A. Eslabones rígidos con pernos</strong> (recomendada)</td>
+<td>Eslabones de PETG o nylon unidos con pernos (filamento de 1.75 mm, varilla o tornillo M3) y zapatas de TPU para agarre</td>
+<td>Resiste golpes; un eslabón roto se cambia solo; no se estira</td>
+<td>Más piezas y armado; los pernos de acero pesan</td>
+</tr>
+<tr>
+<td>B. Banda de una pieza en TPU</td>
+<td>Banda flexible con dientes internos</td>
+<td>Simple, sin pernos, poco ruido</td>
+<td>Se estira y puede saltar dientes con mucho torque; si se corta, se pierde toda</td>
+</tr>
+<tr>
+<td>C. Eslabones mixtos TPU + PETG</td>
+<td>Primeras capas en TPU (agarre) y el resto en PETG (rigidez), en la misma impresión</td>
+<td>Buen agarre y buena resistencia</td>
+<td>Necesita impresora que cambie de material o pausa manual</td>
+</tr>
+</tbody>
+</table>
+<h2 id="riesgos-que-hay-que-resolver-antes-de-modelar">Riesgos que hay que resolver antes de modelar</h2>
+<ol>
+<li><strong>Torque del motor.</strong> Girar sobre su eje con orugas exige arrastrar la oruga de lado contra el piso.
+   Cálculo rápido: con 3 kg y coeficiente de fricción ≈0.8, cada lado necesita ≈12 N; con una catarina
+   de 25 mm de radio son ≈0.29 N·m (≈3 kgf·cm) por motor. La única cifra encontrada para un JGB37-520
+   parecido (319 RPM) es ≈1.9 kgf·cm de torque de bloqueo, <strong>insuficiente</strong>. Hay que <strong>medir el torque real</strong>
+   del motor (palanca + báscula) antes de diseñar. Si no alcanza: catarina más chica, zapatas con menos
+   agarre lateral o un motor con más reducción.</li>
+<li><strong>Peso.</strong> Estimación por lado: oruga ≈85 g, catarina ≈15 g, 2 tensoras ≈20 g, rodamientos ≈10 g,
+   placa lateral ≈40 g, tornillería ≈10 g, total <strong>≈180 g por lado, ≈360 g los dos</strong>, contra ≈70 g de
+   2 ruedas. El presupuesto ya estaba excedido (ver <a href="../presupuesto-peso/">presupuesto-peso.md</a>).</li>
+<li><strong>Descarrilamiento.</strong> Es la falla más común de las orugas, sobre todo en giros sobre su eje y en
+   pisos con mucha fricción. Se previene con guías centrales en los eslabones, rebordes en la catarina
+   y las tensoras, y tensado ajustable.</li>
+<li><strong>Golpes del arma rival.</strong> La oruga queda expuesta a los lados. Conviene que la placa lateral o el
+   caparazón la cubran por arriba y que el diseño permita cambiar eslabones rápido entre combates.</li>
+</ol>
+<h2 id="informacion-que-falta">Información que falta</h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Impresora: Creality K1 SE, 220 × 220 × 250 mm, imprime TPU 95A; un solo extrusor (ver <a href="../impresion-3d/">impresion-3d.md</a>).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Materiales: PLA, PETG, TPU 95A y ABS (sin gabinete, no recomendado). Eslabones en TPU, catarinas y ruedas en PETG.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Torque de bloqueo real del JGB37-520 (palanca + báscula) y corriente de bloqueo.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Medidas del bracket Talos (de ellas depende dónde queda la catarina).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Peso y tamaño del motor del arma (decide cuánto peso queda para las orugas).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Qué hacer con las ruedas de goma de 65 mm: descartarlas o reusarlas.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Tipo de piso de la arena (afecta el agarre y el material de las zapatas).</li>
+</ul>
+<h2 id="referencias">Referencias</h2>
+<p>Proyectos de orugas impresas consultados (2026-11-15). Solo se tomaron ideas generales y cifras;
+no se descargaron sus archivos.</p>
+<ul>
+<li><a href="https://howtomechatronics.com/projects/fully-3d-printed-tank-tracked-robot-platform/">How To Mechatronics: tanque 100 % impreso</a>
+  y <a href="https://www.mfgrobots.com/Article/mfg/mpm/51235.html">la misma guía en mfgrobots</a>: paso de 11 mm,
+  catarina de 12 dientes (≈42 mm), pernos de 2 mm con holgura de 0.3 mm en un extremo.</li>
+<li><a href="https://indico.fnal.gov/event/60714/contributions/272516/attachments/170032/228657/Elijah%20Wilkinson%20CCI%20Final%20Paper.pdf">Fermilab, trabajo de E. Wilkinson (PDF)</a>:
+  TPU agarra mejor pero es débil; PETG es más fuerte; eslabones mixtos TPU + PETG.</li>
+<li><a href="https://cogitation-station.atlassian.net/wiki/spaces/FIR/pages/452427779/Pre-Assembled+3D+Printed+Tracks">Cogitation Station: orugas impresas ya ensambladas</a>:
+  hay que iterar el paso y la holgura con piezas de prueba.</li>
+<li><a href="https://makerworld.com/models/1028483">MakerWorld: cadena impresa paso ISO 16A</a>: eslabones de PETG con pernos de 6 mm.</li>
+<li><a href="https://printables.com/model/613519-tputpe-printed-tank-tracks">Printables: orugas de TPU/TPE</a>: banda flexible de una pieza.</li>
+<li><a href="https://www.superdroidrobots.com/wiki-a/index_php/Tracks">SuperDroid Robots, wiki de orugas</a>: descarrilamiento en giros sobre su eje y pisos con mucha fricción.</li>
+<li><a href="https://game-manual-0.readthedocs.io/en/stable/docs/drivetrains/tank.html">Game Manual 0: transmisiones tipo tanque</a>: giro por derrape (skid-steer).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
