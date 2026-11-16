@@ -6,9 +6,9 @@ son supuestas (ver [Supuestos](#supuestos)).
 
 ![Vista frontal](../../hardware/cad/renders/battlebot-ejemplo-v1-frente.png)
 
-| Vista lateral | Sin orugas (sigue andando) |
-| --- | --- |
-| ![Lado](../../hardware/cad/renders/battlebot-ejemplo-v1-lado.png) | ![Sin orugas](../../hardware/cad/renders/battlebot-ejemplo-v1-sin-orugas.png) |
+| Vista lateral | Martillo al final del golpe | Sin orugas (sigue andando) |
+| --- | --- | --- |
+| ![Lado](../../hardware/cad/renders/battlebot-ejemplo-v1-lado.png) | ![Golpe](../../hardware/cad/renders/battlebot-ejemplo-v1-martillo-golpe.png) | ![Sin orugas](../../hardware/cad/renders/battlebot-ejemplo-v1-sin-orugas.png) |
 
 ## Cambios respecto a la v0
 
@@ -22,6 +22,29 @@ son supuestas (ver [Supuestos](#supuestos)).
 | Banda HTD-5M sin largo definido | **Banda HTD-5M de 310 mm** (62 dientes), centros a 105 mm | Largo estándar que deja ≈ 8 mm entre la hoja y el motor |
 | Collarines de acero | Bridas de aluminio con maza | −150 g |
 
+## Martillo: el monito del CETI
+
+| Elemento | Solución |
+| --- | --- |
+| Monito | Proporciones del STL de referencia a **escala 3**: 166 mm de ancho, 185 mm de alto, 14 mm de grueso. Placa trasera de 3 mm que une las mitades y la cabeza (una sola pieza impresa en PETG) |
+| Pies | Las dos piernas están **paradas en el eje de giro**: los pies son dos mazas redondas de Ø24 que abrazan el eje, cada una con un prisionero M4 |
+| Tamaño | Es el más grande que cabe: con el monito parado el robot mide 289.5 mm de alto (límite 300 mm) |
+| Eje | Aluminio de 8 mm a lo ancho del robot, a 116 mm de altura, sobre 2 × **608-2RS** en soportes impresos atornillados a las placas laterales |
+| Servo | **MG995**, adelante y abajo del eje, atornillado por sus orejas a una placa del soporte izquierdo |
+| Transmisión | Engranes rectos de módulo 1.5, **20 y 20 dientes (1:1)**: el martillo gira lo mismo que el servo y recibe todo su torque (9.4–11 kg·cm) |
+| Recorrido | Parado en reposo; gira hasta **105° hacia atrás** (lado contrario a la sierra), dentro de los 180° del servo. Se revisó cada 15°: no toca nada del robot |
+| Alcance | Al final del golpe la cabeza queda ≈ 70 mm detrás del robot |
+
+- El reglamento permite hasta **2 armas**: sierra + martillo.
+- El servo **no** necesita driver: se controla con una señal PWM del ESP32 (GPIO 9). Se alimenta con un
+  regulador (BEC) de 6 V desde la 3S, no del 5 V de la Freenove (el servo puede pedir 1–2.5 A al arrancar
+  y reiniciaría al ESP32).
+- Torque: con el monito impreso con relleno (≈ 100 g) el servo lo sostiene acostado con mucho margen,
+  pero un golpe fuerte contra el monito puede barrer los engranes del servo. Conviene un servo de más
+  torque si se usa en serio (p. ej. de 20–25 kg·cm con el mismo tamaño).
+- Con el robot en reposo el monito queda dentro del cubo de 300 mm; al golpear sale por detrás (confirmar
+  con los jueces cómo miden el tamaño).
+
 ## Archivos
 
 - Modelo paramétrico: [`hardware/cad/source/battlebot_ejemplo.py`](../../hardware/cad/source/battlebot_ejemplo.py)
@@ -29,14 +52,15 @@ son supuestas (ver [Supuestos](#supuestos)).
 - STEP para SolidWorks en `hardware/cad/step/`:
   - `battlebot-ejemplo-v1.step`: ensamble completo.
   - `battlebot-ejemplo-v1-sin-orugas.step`: el robot sin orugas, apoyado en el piso.
+  - `battlebot-ejemplo-v1-martillo-golpe.step`: el martillo al final del golpe (105°).
   - Uno por pieza fabricada: `eslabon-oruga-v1`, `catarina-v1`, `rueda-libre-v1`, `placa-lateral-v1`,
-    `placa-base-v1`, `poste-eje-arma-v1`, `soporte-motor-arma-v1`, `hoja-sierra-6in-v1`.
+    `placa-base-v1`, `poste-eje-arma-v1`, `soporte-motor-arma-v1`, `hoja-sierra-6in-v1`, `monito-ceti-v1`.
 
 ## Qué tiene
 
 | Sistema | Solución |
 | --- | --- |
-| Tamaño total | **296.2 × 250 × 181.7 mm** (largo × ancho × alto): cabe en el cubo de 300 mm |
+| Tamaño total | **296.2 × 250 × 289.5 mm** con el martillo parado (largo × ancho × alto): cabe en el cubo de 300 mm |
 | Chasis | Placa base de aluminio de 3 mm; placas laterales de aluminio de 5 mm unidas con 6 tramos de ángulo de 3/4" × 1/8" |
 | Tracción | 2 × JGB37-520 abajo atrás, atornillados a las placas laterales (6 × M3 × 8 avellanados) |
 | Orugas | Triangulares, 43 eslabones de paso 12.5 mm, guía central y taco; pernos de hilo de nylon de 3 mm |
@@ -60,7 +84,7 @@ Calculado en el modelo (`battlebot_sin_orugas`):
 
 ## Revisión
 
-- **Interferencias: ninguna** entre las 258 piezas (`cad model interference`).
+- **Interferencias: ninguna** entre las 281 piezas, en reposo y con el martillo al final del golpe (`cad model interference`), y ninguna en todo el recorrido del martillo (revisado cada 15°).
 - Distancia de la punta de la hoja al motor del arma: ≈ 7.9 mm.
 - Velocidad teórica de la oruga: 12 dientes × 12.5 mm × 333 RPM ≈ 0.83 m/s sin carga.
 
@@ -83,15 +107,20 @@ catálogo o estimado de las piezas compradas.
 | Catarinas, ruedas libres, rodamientos 606 y O-rings | 228 |
 | Electrónica, interruptores, pared y cubierta | 277 |
 | Tornillería, ángulos y separadores | 208 |
-| **Total** | **≈ 3380 g** |
+| Martillo: monito (impreso con relleno, ≈ 100 g), eje, 608, soportes, engranes, servo MG995 y tornillos | ≈ 265 |
+| **Total** | **≈ 3690 g** |
 
-**Se pasa ≈ 380 g del límite de 3 kg.** Por dónde recortar:
+**Se pasa ≈ 690 g del límite de 3 kg.** Por dónde recortar:
 
 1. **Placas laterales**: de aluminio de 5 mm a PETG impreso de 6–8 mm (caben en la K1 SE) → ≈ −130 a −170 g; o aluminio de 3 mm → −120 g.
 2. **Postes del arma** de 10 mm macizos a 6 mm con ventana grande (y rodamientos 6901, más delgados) → −90 g.
 3. **Placa base**: más aligeramientos → −60 g.
 4. **Baterías y motor del arma**: pesarlos; entre los tres suman ≈ 775 g estimados.
 5. Cubierta y pared trasera más delgadas o caladas → −30 g.
+6. **Martillo**: monito más chico o más hueco → −30 a −60 g; o quitar el martillo (≈ −265 g).
+
+Aun con todos los recortes de arriba (≈ −450 g) el robot sigue pasado: **con sierra + martillo hay que
+quitar o aligerar algo grande** (p. ej. placas laterales impresas, motor o hoja más ligeros, o el martillo).
 
 Materiales y orientación de impresión de cada pieza: [impresion-3d.md](impresion-3d.md).
 

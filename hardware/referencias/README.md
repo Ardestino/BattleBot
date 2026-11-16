@@ -26,6 +26,7 @@ Cada carpeta lleva:
 | Driver de motores L298N | [driver-l298n](driver-l298n/README.md) | Datos de ST y del módulo; falta medir |
 | Relevador del arma | [relevador-arma](relevador-arma/README.md) | Modelo por definir; requisitos listos |
 | Rodamientos de la ferretería | [rodamientos](rodamientos/README.md) | Tabla con medidas estándar; elegidos 606 (tensoras) y 6201 (arma) |
+| Monito del logotipo del CETI (martillo) | [logo-ceti](logo-ceti/README.md) | STL de referencia del usuario; logotipo del CETI (no publicar sin permiso) |
 | Control Xbox Series X | [control-xbox](control-xbox/README.md) | No va en el robot; solo datos de conexión |
 
 Las conexiones entre componentes están en [arquitectura-electrica.md](../../docs/electronica/arquitectura-electrica.md).

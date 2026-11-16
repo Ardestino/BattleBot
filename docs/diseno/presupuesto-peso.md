@@ -1,6 +1,6 @@
 # Presupuesto de peso
 
-Límite: **3000 g**. El [ensamble de ejemplo v1](ensamble-ejemplo.md) pesa **≈ 3380 g** según su modelo; la tabla de abajo es la estimación anterior del concepto.
+Límite: **3000 g**. El [ensamble de ejemplo v1](ensamble-ejemplo.md) pesa **≈ 3690 g** con el martillo según su modelo; la tabla de abajo es la estimación anterior del concepto.
 
 Estimación anterior: Estimación del concepto Hércules (`hardware/cad/concepts/hercules_botcrash.sc`).
 Los pesos de piezas fabricadas salen del CAD; los de piezas compradas son aproximados.

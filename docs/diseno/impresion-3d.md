@@ -26,6 +26,9 @@ paneles). Para este robot, el PETG cubre lo que daría el ABS.
 | Cuna del motor del arma | 1 | **TPU 95A** | Plana | Amortigua la vibración del motor |
 | Pared trasera | 1 | **PETG** | Acostada (cara grande en la cama) | |
 | Cubierta de electrónica | 1 | **PETG** | Plana | |
+| Monito del CETI | 1 | **PETG** | Acostado sobre la placa trasera | Cabe en la cama (166 × 185 mm). La cabeza y los pies necesitan soporte; 3 perímetros, 10–15 % de relleno para que pese ≈ 100 g |
+| Engranes del martillo (20 y 20 dientes) | 2 | **PETG** | Planos | 100 % de relleno; probar el juego entre dientes |
+| Soportes del martillo | 2 | **PETG** | Cara de la placa lateral en la cama | Insertos de latón M3 (placa lateral y orejas del servo) |
 | Placa lateral (opcional) | 2 | PETG | Plana | Cabe (200 × 118 mm). En PETG de 5 mm pesa ≈ 76 g contra 162 g en aluminio: ahorra ≈ 170 g. Conviene subirla a 6–8 mm y probarla |
 | Placa base | 1 | Aluminio 3 mm | — | No cabe plana en la cama (245 × 149 mm); impresa tendría que ir en dos mitades |
 | Postes del eje del arma | 2 | Aluminio | — | Sostienen los rodamientos del arma; en PETG solo para pruebas |

@@ -1,3 +1,6 @@
+# /// script
+# dependencies = ["bd_warehouse"]
+# ///
 """Ensamble de ejemplo v1 del BattleBot: orugas triangulares con tracción abajo + sierra vertical de 6".
 
 Es un modelo de ejemplo para discutir el acomodo, no un diseño cerrado. Usa los componentes
@@ -11,6 +14,9 @@ Cambios respecto a v0:
   2 rodamientos 6201-2RS, movida por banda HTD-5M de 310 mm desde el motor de la desbrozadora
   (775 de 20 V: Ø41.81 x 67 mm, eje de 5 x 17 mm; barrenos de la cara supuestos).
 - Todos los tornillos que entran por debajo de la placa base son de cabeza avellanada (al ras).
+- Martillo: el monito del logotipo del CETI (escala 3x del STL de referencia) parado con los dos pies en
+  el eje de giro, un eje de 8 mm entre las placas laterales (2 x 608-2RS). Gira hasta 105° hacia atrás
+  (lado contrario a la sierra) movido por un servo MG995 con engranes 1:1 de módulo 1.5 (20/20 dientes).
 
 Resto:
 - Tracción: 2 motorreductores JGB37-520 atornillados a las placas laterales (6 x M3 avellanados en
@@ -104,6 +110,34 @@ WMOTOR_X = DISC_X - math.sqrt(BELT_C**2 - (DISC_Z - WMOTOR_Z) ** 2)
 WMOTOR_Y0 = -25.0                    # cara frontal (lado de la polea)
 MOUNT_T = 6.0                        # soporte impreso del motor del arma
 PULLEY_Y = (-34.0, -50.0)            # ancho de dientes de las poleas
+
+# ---------------------------------------------------------------- Martillo (monito del CETI)
+HAMMER_X, HAMMER_Z = -25.0, 116.0    # eje de giro (a lo ancho del robot)
+HAMMER_STRIKE = 105.0                # giro máximo hacia atrás, en grados
+H_SHAFT_D = 8.0                      # eje de aluminio de 8 mm
+H_SHAFT_Y = (-69.0, 70.0)
+H_BEARING_Y = (61.0, 68.0)           # 608-2RS izquierdo (el derecho es espejo)
+H_GEAR_Y = 54.0                      # plano medio de los engranes (lado izquierdo)
+H_GEAR_W = 8.0
+H_GEAR_M = 1.5
+H_GEAR_TEETH = (20, 20)              # servo / martillo: 1:1, el martillo gira lo mismo que el servo
+H_CENTER = H_GEAR_M * sum(H_GEAR_TEETH) / 2      # 30 mm entre ejes
+H_SERVO_ANGLE = math.radians(100)    # el servo va adelante y abajo, fuera del recorrido del martillo
+H_SERVO_X = HAMMER_X + H_CENTER * math.sin(H_SERVO_ANGLE)
+H_SERVO_Z = HAMMER_Z + H_CENTER * math.cos(H_SERVO_ANGLE)
+# Servo MG995 (medidas típicas de servo estándar; medir el real): eje de salida a +Y
+MG995_L, MG995_W, MG995_H = 40.7, 19.7, 37.0     # caja: largo (vertical, hacia +Z), ancho (X), alto (Y)
+MG995_OUT = 10.0                                  # eje de salida a 10 mm del extremo de abajo
+MG995_EARS = (54.0, 2.5, 28.0)                    # largo con orejas, espesor, altura de la oreja desde el fondo
+MG995_HOLES = (49.5, 10.0)                        # barrenos de las orejas (Ø4.5)
+MG995_SPLINE = (5.8, 4.0)                         # estría de 25 dientes
+MG995_HORN = (20.0, 2.0)                          # cuerno redondo (viene con el servo)
+H_SERVO_TOP_Y = H_GEAR_Y - H_GEAR_W / 2 - MG995_HORN[1] - MG995_SPLINE[1]   # cara superior del servo
+H_BRACKET_ZMIN = 93.0                # los soportes no bajan de aquí (relevador y pila de 9 V abajo)
+H_SCREW_DZ = 12.0                    # tornillos de los soportes a la placa lateral: (X, Z ± 12)
+FIG_SCALE = 3.0                      # escala del monito respecto al STL de referencia (62 mm de alto)
+FIG_FOOT_R = 12.0                    # los pies son dos mazas de Ø24 montadas en el eje
+BACK_T = 3.0                         # placa trasera que une las dos mitades y la cabeza
 
 # ---------------------------------------------------------------- Colores
 ALU = "#b9bfc7"
@@ -437,6 +471,7 @@ def frame_plate_body(x_front):
         bd.Pos(x_front - TENSION_SLOT, IDLER_Z) * bd.Circle(14.0),
         bd.Pos(x_front + TENSION_SLOT, IDLER_Z) * bd.Circle(14.0),
         bd.Pos(TOP_X, TOP_Z) * bd.Circle(14.0),
+        bd.Pos(HAMMER_X, HAMMER_Z) * bd.Circle(18.0),
     )
     window = bd.Polygon((-44.0, 37.0), (44.0, 37.0), (0.0, 80.0), align=None)
     window = bd.fillet(window.vertices(), 6.0)
@@ -450,9 +485,13 @@ def frame_plate_body(x_front):
     for x in ANGLE_X:
         holes += bd.Pos(x, ANGLE_HOLE_Z) * bd.Circle(1.7)
     plate = bd.extrude(xz_plane(FRAME_OUT) * (outline - window - holes), amount=FRAME_T)
-    for x, z in gear_screw_points():   # 6 x M3 avellanados desde el lado de la oruga
+    for x, z in list(gear_screw_points()) + hammer_screw_points():   # M3 avellanados desde el lado de la oruga
         plate = plate - place(csk_hole(3, FRAME_T + 1), (x, FRAME_OUT, z), (0, 1, 0))
     return plate
+
+
+def hammer_screw_points():
+    return [(HAMMER_X, HAMMER_Z + H_SCREW_DZ), (HAMMER_X, HAMMER_Z - H_SCREW_DZ)]
 
 
 def angle_bracket_body():
@@ -509,6 +548,8 @@ def drive_side_left():
     parts = [finish(frame_plate_body(x_front), "placa_lateral", ALU), finish(drive_motor_body(), "motor_jgb37_520", "#9aa0a6")]
     for x, z in gear_screw_points():
         parts.append(place(countersunk_screw(3, 8), (x, FRAME_OUT, z), (0, 1, 0)))
+    for x, z in hammer_screw_points():   # soporte del martillo (rosca en inserto de latón)
+        parts.append(place(countersunk_screw(3, 10), (x, FRAME_OUT, z), (0, 1, 0)))
 
     # catarina orientada para que sus huecos coincidan con las guías de la oruga
     centers = [((a[0] + b[0]) / 2, (a[1] + b[1]) / 2) for a, b in zip(hinges[:-1], hinges[1:])]
@@ -875,6 +916,166 @@ def weapon_parts():
     return parts
 
 
+# ================================================================= martillo: monito del CETI
+def hammer_loc(theta_deg):
+    """Giro del martillo alrededor de su eje (a lo ancho); positivo = hacia atrás (lado contrario a la sierra)."""
+    return bd.Location((HAMMER_X, 0, HAMMER_Z)) * bd.Location((0, 0, 0), (0, -theta_deg, 0))
+
+
+def figure_body():
+    """Monito del logotipo del CETI parado sobre el eje del martillo (proporciones del STL, escala FIG_SCALE).
+
+    Sistema local: origen en el eje, Z hacia la cabeza (en reposo), Y a lo ancho (brazos), X hacia el frente
+    (la cara del logotipo mira al frente; la espalda es la que golpea). Los pies son dos mazas redondas que
+    abrazan el eje de 8 mm, cada una con un prisionero M4.
+    """
+    s = FIG_SCALE
+
+    def zl(v):                      # z del STL (pies en -3.84) -> z local (pies en -FIG_FOOT_R)
+        return s * (v + 3.84) - FIG_FOOT_R
+
+    half = bd.Polygon(
+        *[(s * u, zl(v)) for u, v in (
+            (1.99, -3.84), (10.0, -3.84), (10.0, 30.03), (27.71, 30.03), (27.71, 37.81),
+            (3.49, 37.81), (1.99, 36.31))],
+        align=None,
+    )
+    halves = half + bd.mirror(half, bd.Plane.YZ)
+    t = s * 4.65                                  # grueso del cuerpo
+    body = bd.extrude(bd.Plane.YZ * halves, amount=t / 2, both=True)
+    head_z = zl(49.545)
+    head = bd.Pos(-s * 0.13, 0, head_z) * bd.Sphere(s * 8.3)
+    back = box_min(-t / 2 - BACK_T, -s * 1.99 - 6.0, -FIG_FOOT_R, -t / 2 + 0.01, s * 1.99 + 6.0, head_z)
+    leg_y = (s * 1.99, s * 10.0)
+    feet = None
+    for side in (1, -1):
+        foot = place(cyl(FIG_FOOT_R, leg_y[1] - leg_y[0]), (0, side * leg_y[0], 0), (0, side, 0))
+        feet = foot if feet is None else feet + foot
+    fig = body + head + back + feet
+    fig = fig - place(cyl(H_SHAFT_D / 2 + 0.05, 2 * leg_y[1] + 2, -leg_y[1] - 1), (0, 0, 0), (0, 1, 0))
+    for side in (1, -1):            # prisionero M4 en cada pie, hacia el plano del eje
+        fig = fig - bd.Pos(0, side * sum(leg_y) / 2, -FIG_FOOT_R - 1) * cyl(2.0, FIG_FOOT_R - 2)
+    return fig
+
+
+def spur_gear(teeth, bore, hub=True):
+    """Engrane recto de involuta (bd_warehouse, 20°), centrado en z = 0; con maza hacia +Z o prisionero en el cuerpo."""
+    from bd_warehouse.gear import SpurGear
+
+    g = SpurGear(module=H_GEAR_M, tooth_count=teeth, pressure_angle=20, root_fillet=0.3, thickness=H_GEAR_W)
+    z_grub = 0.0
+    if hub:
+        g = g + bd.Pos(0, 0, H_GEAR_W / 2) * cyl(bore / 2 + 4.0, 5.0)
+        z_grub = H_GEAR_W / 2 + 2.5
+    g = g - cyl(bore / 2 + 0.05, H_GEAR_W + 12, -H_GEAR_W)
+    return g - bd.Pos(0, 0, z_grub) * bd.Rot(0, 90, 0) * cyl(1.5, bore / 2 + 5)
+
+
+def servo_gear():
+    """Engrane de 20 dientes que se atornilla al cuerno redondo del servo (4 x M2)."""
+    g = spur_gear(H_GEAR_TEETH[0], 6.0, hub=False)
+    for i in range(4):
+        a = math.radians(45 + 90 * i)
+        g = g - bd.Pos(7.0 * math.cos(a), 7.0 * math.sin(a), -H_GEAR_W) * cyl(1.1, 2 * H_GEAR_W)
+    return g
+
+
+def mg995_body():
+    """Servo MG995 en coordenadas del robot: eje de salida en (H_SERVO_X, *, H_SERVO_Z) apuntando a +Y."""
+    x0, x1 = H_SERVO_X - MG995_W / 2, H_SERVO_X + MG995_W / 2
+    z0, z1 = H_SERVO_Z - MG995_OUT, H_SERVO_Z - MG995_OUT + MG995_L
+    y1 = H_SERVO_TOP_Y
+    y0 = y1 - MG995_H
+    case = box_min(x0, y0, z0, x1, y1, z1)
+    case = bd.fillet(case.edges().filter_by(bd.Axis.Y), 1.0)
+    zc = (z0 + z1) / 2
+    ear_y1 = y0 + MG995_EARS[2]
+    ears = box_min(x0, ear_y1 - MG995_EARS[1], zc - MG995_EARS[0] / 2, x1, ear_y1, zc + MG995_EARS[0] / 2)
+    for dz in (-MG995_HOLES[0] / 2, MG995_HOLES[0] / 2):
+        for dx in (-MG995_HOLES[1] / 2, MG995_HOLES[1] / 2):
+            ears = ears - place(cyl(2.25, 10, -5), (H_SERVO_X + dx, ear_y1, zc + dz), (0, 1, 0))
+    top = place(cyl(6.0, 1.5), (H_SERVO_X, y1, H_SERVO_Z), (0, 1, 0))
+    spline = place(cyl(MG995_SPLINE[0] / 2, MG995_SPLINE[1]), (H_SERVO_X, y1, H_SERVO_Z), (0, 1, 0))
+    horn = place(cyl(MG995_HORN[0] / 2, MG995_HORN[1]), (H_SERVO_X, y1 + MG995_SPLINE[1], H_SERVO_Z), (0, 1, 0))
+    cable = box_min(x0 + 4, y0 + 4, z0 - 3, x1 - 4, y0 + 8, z0)
+    return case + ears + top + spline + horn + cable
+
+
+def servo_ear_points():
+    zc = H_SERVO_Z - MG995_OUT + MG995_L / 2
+    return [(H_SERVO_X + dx, zc + dz) for dz in (-MG995_HOLES[0] / 2, MG995_HOLES[0] / 2) for dx in (-MG995_HOLES[1] / 2, MG995_HOLES[1] / 2)]
+
+
+def hammer_block_body():
+    """Soporte del rodamiento 608 del lado izquierdo (pegado a la placa lateral)."""
+    y0, y1 = H_BEARING_Y[0], FRAME_IN
+    blk = box_min(HAMMER_X - 16, y0, max(HAMMER_Z - 16, H_BRACKET_ZMIN), HAMMER_X + 16, y1, HAMMER_Z + 16)
+    blk = bd.fillet(blk.edges().filter_by(bd.Axis.Y), 3.0)
+    blk = blk - place(cyl(11.0 + 0.05, H_BEARING_Y[1] - y0 + 0.02, -0.01), (HAMMER_X, y0, HAMMER_Z), (0, 1, 0))
+    blk = blk - place(cyl(H_SHAFT_D / 2 + 1.0, y1 - y0 + 2, -1), (HAMMER_X, y0, HAMMER_Z), (0, 1, 0))
+    for x, z in hammer_screw_points():
+        blk = blk - place(cyl(1.5, 6.0), (x, y1, z), (0, -1, 0))   # inserto de latón M3
+    return blk
+
+
+def hammer_bracket_left_body():
+    """Soporte izquierdo: bloque del 608, puente sobre los engranes, poste y placa donde se atornilla el MG995."""
+    blk = hammer_block_body()
+    post = (H_SERVO_X + 16.0, H_SERVO_Z + 16.0)
+    bridge_y0, bridge_y1 = H_GEAR_Y + H_GEAR_W / 2 + 0.5, H_BEARING_Y[0]
+    bridge = hull(bd.Pos(HAMMER_X, HAMMER_Z) * bd.Circle(16.0), bd.Pos(H_SERVO_X, H_SERVO_Z) * bd.Circle(14.0), bd.Pos(*post) * bd.Circle(6.0))
+    bridge = bd.extrude(xz_plane(bridge_y1) * bridge, amount=bridge_y1 - bridge_y0)
+    plate_y1 = H_SERVO_TOP_Y - MG995_H + MG995_EARS[2] - MG995_EARS[1]   # bajo las orejas del servo
+    plate_y0 = plate_y1 - 6.0
+    zc = H_SERVO_Z - MG995_OUT + MG995_L / 2
+    ear_box = bd.Pos(H_SERVO_X, zc) * bd.Rectangle(MG995_W + 8.0, MG995_EARS[0] + 4.0)
+    plate = hull(ear_box, bd.Pos(*post) * bd.Circle(6.0))
+    plate = plate - bd.Pos(H_SERVO_X, zc) * bd.Rectangle(MG995_W + 0.6, MG995_L + 0.6)
+    plate = bd.extrude(xz_plane(plate_y1) * plate, amount=plate_y1 - plate_y0)
+    for x, z in servo_ear_points():   # insertos de latón M3 para las orejas
+        plate = plate - place(cyl(1.5, 6.0), (x, plate_y1, z), (0, -1, 0))
+    pillar = place(cyl(5.0, bridge_y1 - plate_y0), (post[0], plate_y0, post[1]), (0, 1, 0))
+    body = blk + bridge + plate + pillar
+    body = body - box_min(-200, 0, 0, 200, 100, H_BRACKET_ZMIN)            # nada debajo de z = 93
+    body = body - place(cyl(H_SHAFT_D / 2 + 1.0, 40.0, -20.0), (HAMMER_X, bridge_y0, HAMMER_Z), (0, 1, 0))
+    return body
+
+
+def hammer_parts(theta):
+    """Martillo completo; `theta` = giro hacia atrás en grados (0 = parado)."""
+    loc = hammer_loc(theta)
+    # fase de los engranes: un diente del del martillo apunta al servo y un hueco del del servo al martillo
+    # (sistema local de los engranes: X = X del robot, Y = Z del robot)
+    alpha = math.degrees(math.atan2(H_SERVO_Z - HAMMER_Z, H_SERVO_X - HAMMER_X))
+    leg_mid = FIG_SCALE * (1.99 + 10.0) / 2
+    moving = [
+        finish(figure_body(), "monito_ceti", "#1f5fae"),
+        finish(place(cyl(H_SHAFT_D / 2, H_SHAFT_Y[1] - H_SHAFT_Y[0]), (0, H_SHAFT_Y[0], 0), (0, 1, 0)), "eje_martillo_8mm", ALU),
+        finish(place(spur_gear(H_GEAR_TEETH[1], H_SHAFT_D).moved(bd.Location((0, 0, 0), (0, 0, alpha))), (0, H_GEAR_Y, 0), (0, -1, 0)), "engrane_martillo_20T", PETG),
+    ]
+    for side in (1, -1):
+        moving.append(place(set_screw(4, 8), (0, side * leg_mid, -FIG_FOOT_R), (0, 0, -1)))
+    moving = [finish(m.moved(loc), m.label, m.color) for m in moving]
+    # piezas fijas
+    fixed = [finish(hammer_bracket_left_body(), "soporte_martillo_izq", PETG)]
+    fixed.append(mirror_y(finish(hammer_block_body(), "soporte_martillo_der", PETG)))
+    for side in (1, -1):
+        fixed.append(place(bearing(8, 22, 7, "608_2RS"), (HAMMER_X, side * H_BEARING_Y[0], HAMMER_Z), (0, side, 0)))
+    fixed.append(finish(mg995_body(), "servo_mg995", "#1b1b1b"))
+    gear_a = alpha + 180.0 + 180.0 / H_GEAR_TEETH[0] - theta * H_GEAR_TEETH[1] / H_GEAR_TEETH[0]
+    sg = servo_gear().moved(bd.Location((0, 0, 0), (0, 0, gear_a)))
+    fixed.append(finish(place(sg, (H_SERVO_X, H_GEAR_Y, H_SERVO_Z), (0, -1, 0)), "engrane_servo_20T", PETG))
+    ear_top = H_SERVO_TOP_Y - MG995_H + MG995_EARS[2]
+    for x, z in servo_ear_points():
+        fixed.append(place(socket_cap_screw(3, 8), (x, ear_top, z), (0, 1, 0)))
+    return moving + fixed
+
+
+@model
+def monito_ceti():
+    return finish(figure_body(), "monito_ceti", "#1f5fae")
+
+
 # ================================================================= ensamble
 def chassis_parts():
     parts = [finish(base_plate_body(), "placa_base", ALU), finish(rear_wall_body(), "pared_trasera", PETG), finish(deck_body(), "cubierta_electronica", "#4a4f57")]
@@ -930,6 +1131,7 @@ def battlebot_ejemplo():
             group("traccion_derecha", right),
             group("arma", weapon_parts()),
             group("electronica", electronics_parts()),
+            group("martillo", hammer_parts(0.0)),
         ]
     )
     robot.label = "battlebot_ejemplo"
@@ -959,6 +1161,15 @@ def battlebot_sin_orugas():
 
 
 @model
+def battlebot_martillo_golpe():
+    """El robot con el martillo al final de su golpe (HAMMER_STRIKE grados hacia atrás)."""
+    groups = [g for g in battlebot_ejemplo().shape.children if g.label != "martillo"]
+    robot = bd.Compound(children=groups + [group("martillo", hammer_parts(HAMMER_STRIKE))])
+    robot.label = "battlebot_martillo_golpe"
+    return robot
+
+
+@model
 def placa_lateral():
     x_front, _ = track_layout()
     return finish(frame_plate_body(x_front), "placa_lateral", ALU)
@@ -984,6 +1195,100 @@ def hoja_sierra():
     return finish(blade_body(), "hoja_sierra_6in_40T", "#c9ced4")
 
 
+# ================================================================= piezas impresas (una por una y acomodadas para imprimir)
+def print_pose(shape, rot=(0, 0, 0)):
+    """Gira la pieza a su orientación de impresión y la deja centrada en XY con la base en z = 0."""
+    r = bd.Rot(*rot) * shape
+    bb = r.bounding_box()
+    return bd.Pos(-(bb.min.X + bb.max.X) / 2, -(bb.min.Y + bb.max.Y) / 2, -bb.min.Z) * r
+
+
+def printed_parts():
+    """(nombre, cantidad, material, cuerpo en orientación de impresión). Ver docs/diseno/impresion-3d.md."""
+    return [
+        ("eslabon_oruga", 94, TPU, print_pose(track_link_body(), (90, 0, 0))),           # de canto, pernos verticales
+        ("cuna_motor_arma", 1, TPU, print_pose(saddle_body())),
+        ("catarina", 2, PETG, print_pose(sprocket_body())),
+        ("rueda_libre", 4, PETG, print_pose(idler_body())),
+        ("soporte_motor_arma", 1, PETG, print_pose(weapon_mount_body())),                 # pie en la cama
+        ("pared_trasera", 1, PETG, print_pose(rear_wall_body(), (0, -90, 0))),            # acostada
+        ("cubierta_electronica", 1, PETG, print_pose(deck_body())),
+        ("porta_pila_9V", 1, PETG, print_pose(pila_9v_parts()[0])),
+        ("monito_ceti", 1, PETG, print_pose(figure_body(), (0, -90, 0))),                # acostado sobre la placa trasera
+        ("soporte_martillo_izq", 1, PETG, print_pose(hammer_bracket_left_body(), (-90, 0, 0))),   # cara de la placa lateral abajo
+        ("soporte_martillo_der", 1, PETG, print_pose(mirror_y(finish(hammer_block_body(), "x", PETG)), (90, 0, 0))),
+        ("engrane_martillo_20T", 1, PETG, print_pose(spur_gear(H_GEAR_TEETH[1], H_SHAFT_D))),
+        ("engrane_servo_20T", 1, PETG, print_pose(servo_gear())),
+    ]
+
+
+def printed_part(name):
+    for n, _, color, body in printed_parts():
+        if n == name:
+            return finish(body, n, color)
+    raise KeyError(name)
+
+
+@model
+def pared_trasera():
+    return printed_part("pared_trasera")
+
+
+@model
+def cubierta_electronica():
+    return printed_part("cubierta_electronica")
+
+
+@model
+def porta_pila_9v():
+    return printed_part("porta_pila_9V")
+
+
+@model
+def cuna_motor_arma():
+    return printed_part("cuna_motor_arma")
+
+
+@model
+def soporte_martillo_izq():
+    return printed_part("soporte_martillo_izq")
+
+
+@model
+def soporte_martillo_der():
+    return printed_part("soporte_martillo_der")
+
+
+@model
+def engrane_martillo():
+    return printed_part("engrane_martillo_20T")
+
+
+@model
+def engrane_servo():
+    return printed_part("engrane_servo_20T")
+
+
+@model
+def piezas_impresion():
+    """Una pieza de cada tipo, en su orientación de impresión y en filas (negro = TPU, naranja = PETG).
+
+    La etiqueta lleva la cantidad a imprimir (p. ej. eslabon_oruga_x94).
+    """
+    gap, row_w = 15.0, 520.0
+    x = y = row_h = 0.0
+    parts = []
+    for name, qty, color, body in printed_parts():
+        bb = body.bounding_box()
+        w, d = bb.max.X - bb.min.X, bb.max.Y - bb.min.Y
+        if x > 0 and x + w > row_w:
+            x, y, row_h = 0.0, y - row_h - gap, 0.0
+        parts.append(finish(bd.Pos(x + w / 2, y - d / 2, 0) * body, f"{name}_x{qty}", color))
+        x += w + gap
+        row_h = max(row_h, d)
+    return bd.Compound(children=parts, label="piezas_impresion")
+
+
 if __name__ == "__main__":
     eslabon_oruga()
     catarina()
@@ -995,3 +1300,14 @@ if __name__ == "__main__":
     hoja_sierra()
     battlebot_ejemplo()
     battlebot_sin_orugas()
+    monito_ceti()
+    battlebot_martillo_golpe()
+    pared_trasera()
+    cubierta_electronica()
+    porta_pila_9v()
+    cuna_motor_arma()
+    soporte_martillo_izq()
+    soporte_martillo_der()
+    engrane_martillo()
+    engrane_servo()
+    piezas_impresion()

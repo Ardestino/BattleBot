@@ -37,12 +37,22 @@ marcados con ⚠ dependen de medidas pendientes.
 - Las dos baterías 18650 llevan BMS personalizado; ver la ficha de [baterías](../../hardware/referencias/baterias/README.md)
   sobre la corriente de corte del BMS del arma.
 
+## Martillo (monito del CETI)
+
+- **Servo MG995** (4.8–7.2 V) controlado con PWM de 50 Hz desde el GPIO 9 del ESP32 (LEDC).
+- Alimentación: **regulador (BEC) de 6 V y 3 A desde la 3S**, después del interruptor general. No usar el
+  5 V de la Freenove: el servo puede pedir 1–2.5 A al arrancar o al frenarse y reiniciaría al ESP32.
+- Tierra del BEC unida a la tierra común.
+- Posiciones: 0° = monito parado; 105° = golpe. El firmware limita el recorrido a ese rango.
+- Failsafe: si se pierde el control, el martillo regresa a 0° (parado).
+
 ## Voltajes y corrientes
 
 | Rama | Voltaje | Corriente esperada | Notas |
 | --- | --- | --- | --- |
 | Motores de tracción | 3S → 8–10 V en el motor (caída del L298N) | Hasta 2 A por canal continuos, 3 A pico | Corriente de bloqueo del JGB37 por medir ⚠ |
 | Freenove + ESP32-S3 | Pila de 9 V → 5 V y 3.3 V | ≈0.1–0.25 A (BLE activo) | Una alcalina dura ≈ 1–2 h: cambiarla antes de cada combate ⚠ |
+| Servo del martillo (MG995) | 3S → BEC de 6 V | ≈ 0.2 A en reposo, 1–2.5 A al arrancar | BEC aparte, no del 5 V de la Freenove ⚠ |
 | Bobina del relevador | 12 V (o 5 V) | ≈0.15 A (automotriz 12 V) | Según el modelo ⚠ |
 | Motor del arma (775 de 20 V) | 5S, 18–21 V | Arranque desconocido (posiblemente decenas de A) | Medir; el BMS no debe cortar en el arranque ⚠ |
 

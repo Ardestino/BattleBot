@@ -36,6 +36,7 @@ Para leer voltajes de batería usar **ADC1** (GPIO 1–10): el ADC2 se bloquea c
 | Voltaje batería 3S (divisor) | 1 | ADC1 |
 | Voltaje batería 5S (divisor) | 2 | ADC1 |
 | Voltaje pila 9 V (divisor) | 8 | ADC1 |
+| Servo del martillo (MG995) | 9 | PWM de 50 Hz con LEDC |
 
 Detalle de conexiones en [arquitectura-electrica.md](../../../docs/electronica/arquitectura-electrica.md).
 
