@@ -31,6 +31,9 @@ tools/video/_preview_*.jpg
 *.gcode
 *.bgcode
 
+# --- Imágenes temporales de revisión CAD ---
+tmp/
+
 # --- Documentación generada ---
 site/
 
@@ -38,3 +41,6 @@ site/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# --- Referencias de vendedores (contenido de terceros, solo local) ---
+hardware/referencias/**/terceros/

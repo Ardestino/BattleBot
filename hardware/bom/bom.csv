@@ -1,15 +1,50 @@
 pieza,cantidad,descripcion,material,peso_unitario_g,costo_unitario_mxn,proveedor,estado
-Motorreductor JGA25-370,4,"12 V, 170 RPM, con encoder Hall, eje D de 4 mm",,95,,,disponible
-Rueda de goma 65 mm,4,"Rin de plástico amarillo, aprox. 65 x 27 mm (por medir)",Goma/plástico,35,,,disponible
-Motor del arma 24 V,1,Motor recuperado de podadora eléctrica (datos por medir),,,,,disponible
-Batería 3S Li-ion,1,"Celdas de taladro con BMS de 3 celdas (tracción y electrónica)",Li-ion,160,,,disponible
-Batería 5S Li-ion,1,Celdas de taladro (arma),Li-ion,265,,,disponible
-ESP32-S3,1,Controlador y receptor Bluetooth,,10,,,disponible
+Motorreductor JGB37-520,2,"12 V, 333 RPM, eje D de 6 mm descentrado 7 mm, reductor Ø37; una rueda por lado (tracción diferencial); ficha: hardware/referencias/motor-traccion-jgb37-520",,170,,,disponible
+Bracket para motor 37B / 2342,2,"SKU TA0669-B6D3, acero inoxidable 304 de 1.8 mm; https://www.taloselectronics.com/products/bracket-para-2342l012-37b; en el ensamble v1 la placa lateral hace de soporte (el bracket queda para pruebas)",Acero inoxidable 304,33.1,135,Talos Electronics,disponible
+Motorreductor JGA25-370,4,"12 V, 170 RPM, con encoder Hall, eje D de 4 mm (reemplazado por el JGB37-520)",,95,,,no se usa
+Rueda de goma 65 mm,4,"Rin de plástico amarillo, aprox. 65 x 27 mm (por medir); posiblemente ya no se use",Goma/plástico,35,,,por decidir
+Oruga triangular impresa (43 eslabones c/u),2,"Paso 12.5 mm, 30 mm de ancho, guía central y taco; pernos de 3 mm; CAD: hardware/cad/source/battlebot_ejemplo.py (eslabon_oruga: 1.74 cm3 = 2.1 g en TPU; 90 g por oruga); imprimir 8 de repuesto",TPU 95A (impreso),90.6,,,por fabricar (v1)
+Catarina motriz 12 dientes,2,"Abajo atrás; Ø40.4 mm con 2 ranuras para O-ring (tracción si se pierde la oruga), barreno en D de 6 mm, prisionero M3 x 6; CAD: hardware/cad/source/battlebot_ejemplo.py (24.5 cm3)",PETG (impreso),31.1,,,por fabricar (v1)
+Rueda libre de oruga,4,"Delantera (tensa en ranura de ±4 mm) y de arriba; Ø35.6 x 28 mm, ranura para la guía, 2 x 606 por rueda; CAD: hardware/cad/source/battlebot_ejemplo.py (18.0 cm3)",PETG (impreso),22.8,,,por fabricar (v1)
+Rodamiento 606-2RS,8,"6 x 17 x 6 mm, dos por rueda tensora (disponible en ferretería)",Acero,8,,Ferretería,por comprar
+Placa lateral de oruga,2,"Aluminio de 5 mm: motor abajo atrás (6 x M3 avellanado, Ø31), ruedas libres M6, ranura de tensado; CAD: hardware/cad/source/battlebot_ejemplo.py (59.9 cm3)",Aluminio 6061 5 mm,161.7,,,por fabricar (v1; aligerar)
+Desbrozadora inalámbrica 21 V (motor + hoja de 6 in),1,Se usa su motor 775 de 20 V (Ø41.81 x 67 mm, eje 5 x 17 mm; peso estimado) y la hoja; https://www.temu.com/mx/goods.html?goods_id=604907939674207; ficha: hardware/referencias/motor-arma-desbrozadora,,350,473.19,Temu,por comprar
+Batería 3S 18650 (3S1P),1,3 celdas 18650 con BMS personalizado; tracción y bobina del relevador; ≈68 x 58 x 21 mm; ficha: hardware/referencias/baterias,Li-ion 18650,155,,,disponible
+Batería 5S 18650 (5S1P),1,5 celdas 18650 con BMS personalizado; arma (775 de 20 V); ≈68 x 95 x 21 mm; revisar corte del BMS en el arranque,Li-ion 18650,250,,,disponible
+Pila cuadrada de 9 V (6LR61) + broche,1,Alimenta Freenove + ESP32-S3; alcalina ≈1–2 h de uso o recargable de 9 V; llevar repuestos,,45,,,por comprar
+Porta pila de 9 V,1,"Sobre la cubierta de electrónica, con paso de cincho; 2 x M3 x 6 avellanados; CAD: hardware/cad/source/battlebot_ejemplo.py",PETG (impreso),9.8,,,por fabricar (v1)
+"ESP32-S3 (Freenove ESP32-S3 WROOM, por confirmar)",1,Controlador y receptor Bluetooth; ficha: hardware/referencias/esp32-s3,,10,,,disponible
+Placa de expansión Freenove Breakout (FNK0101),1,"Sockets, clemas, LED por GPIO, reguladores 5 V y 3.3 V (3 A); peso por medir; ficha: hardware/referencias/placa-breakout-freenove",,,,Freenove,disponible
 Control Xbox Series X,1,Control por BLE (no va en el robot),,,,,disponible
-Relevador del arma,1,Por definir (automotriz ≥ 40 A o MOSFET),,,,,por comprar
-Controlador de motores de tracción,1,Por definir (2 canales para motores con escobillas),,,,,por comprar
-Interruptor general,1,Llave de seguridad accesible desde fuera,,,,,por comprar
-Interruptor del arma,1,Conector o llave removible en serie con la batería 5S,,,,,por comprar
+Relevador del arma,1,Contacto NO para CD ≥ 24 V y mayor que el arranque del motor (p. ej. automotriz 12 V 40 A) + transistor y diodos; modelo por definir; ficha: hardware/referencias/relevador-arma,,,,,por definir
+Driver de motores L298N,1,"Puente H doble, 2 A por canal (3 A pico), caída de 2–4.9 V; ficha: hardware/referencias/driver-l298n",,30,,,disponible
+Interruptor general,1,De doble polo (DPST): corta la 3S y la pila de 9 V; en la pared trasera,,,,,por comprar
+Interruptor del arma,1,Conector o llave removible en serie con la batería 5S; en el ensamble v1 va en la pared trasera (Ø16 mm),,,,,por comprar
 Fusibles,2,Uno por batería,,,,,por comprar
-Disco del arma,1,"Ø130 mm, acero templado",Acero,550,,,por fabricar
-Placa base,1,"200 x 220 mm, aligerada",Aluminio 6061 3 mm,300,,,por fabricar
+Soporte motor JGA25 v1,4,"Placa en L con nervios, 36 x 35 x 36.5 mm; CAD: hardware/cad/source/soporte_motor_jga25.py (11.4 cm3: 14.5 g en PETG, 30.8 g en aluminio)",PETG o aluminio 6061,14.5,,,no se usa (era para el JGA25)
+Placa base,1,"245 x 149 mm, 10 aligeramientos, barrenos avellanados por abajo; CAD: hardware/cad/source/battlebot_ejemplo.py (97.7 cm3)",Aluminio 6061 3 mm,263.9,,,por fabricar (v1)
+Pared trasera,1,"Lleva los dos interruptores (al centro, entre los motores); pie atornillado a la base; CAD: hardware/cad/source/battlebot_ejemplo.py (32.6 cm3)",PETG (impreso),41.4,,,por fabricar (v1)
+Cubierta de electrónica,1,90 x 146 x 3 mm sobre las baterías; Freenove y relevador; recorte para la banda del arma; CAD: hardware/cad/source/battlebot_ejemplo.py (36.0 cm3),PETG (impreso),45.8,,,por fabricar (v1)
+Poste del eje del arma,2,Aluminio de 10 mm con alojamiento para 6201 y barreno del seguro; CAD: hardware/cad/source/battlebot_ejemplo.py (39.2 cm3),Aluminio 6061 10 mm,105.8,,,por fabricar (v1)
+Cuna del motor del arma,1,Apoyo trasero del motor con paso para cincho; CAD: hardware/cad/source/battlebot_ejemplo.py,TPU 95A (impreso),1.6,,,por fabricar (v1)
+Ángulo de aluminio 3/4 x 1/8 in,6,Tramos de 15 mm que unen placas laterales y base,Aluminio,4.3,,Ferretería,por comprar
+Eje del arma Ø12 x 86 mm,1,Acero,Acero,76.4,,,por fabricar (v1)
+Rodamiento 6201-2RS,2,"12 x 32 x 10 mm, uno por poste (disponible en ferretería)",Acero,37,,Ferretería,por comprar
+Polea HTD-5M 20 dientes,2,"Para banda de 15 mm; barreno 12 mm (eje del arma) y 5 mm (motor, por confirmar)",Aluminio,36.6,,,por comprar
+"Banda HTD-5M 310 mm (62 dientes), 15 mm",1,Distancia entre centros 105 mm con poleas de 20 dientes,Hule,18.8,,,por comprar
+Perno de seguro del arma,1,Ø6 x 62 mm con argolla; bloquea el disco (seguro mecánico del reglamento),Acero,16.4,,,por fabricar
+Separador M6 de 4 mm,4,Entre placa lateral y rodamiento de la tensora,Acero,1.5,,,por comprar
+Separador hexagonal M3 x 45,4,Base a cubierta de electrónica,Latón,2.3,,,por comprar
+Separador hexagonal M3 x 6,8,Freenove y L298N,Latón,0.3,,,por comprar
+Prisionero M3 x 6 (ISO 4026),2,Catarina al eje del motor,Acero,0.3,,,por comprar
+Hilo de nylon de 3 mm (desbrozadora),1,Pernos de las orugas: 86 tramos de 30 mm (≈2.6 m),Nylon,8,,Ferretería,por comprar
+O-ring 35 x 3 mm NBR,4,Dos por catarina: llanta de emergencia si se cae la oruga,Hule NBR,1,,,por comprar
+Hoja de sierra 6 in 40 dientes,1,"Viene con la desbrozadora; Ø152.4 x 1.8 mm (supuesto), barreno 20 mm; hacer barreno de 7 mm para el seguro; CAD: hardware/cad/source/battlebot_ejemplo.py (29.6 cm3)",Acero con dientes de carburo,232.3,,,incluida
+Buje de 20 a 12 mm,1,Centra la hoja en el eje,Acero,2.8,,,por fabricar
+Brida de aluminio para la hoja,2,Ø36 x 4 mm con maza Ø20 y prisionero M5; aprietan la hoja; CAD: hardware/cad/source/battlebot_ejemplo.py,Aluminio,14,,,por fabricar (v1)
+Soporte del motor del arma,1,PETG 6 mm con pie; 2 x M4 avellanados a la cara del motor; CAD: hardware/cad/source/battlebot_ejemplo.py (11.1 cm3),PETG (impreso),14,,,por fabricar (v1)
+Tornillo M6 x 50 (ISO 4762) + tuerca M6 de seguridad + rondana,4,Ejes de las ruedas libres,Acero,18.4,,Ferretería,por comprar
+"Tornillo M3 avellanado (ISO 10642): 16 x8, 10 x6, 6 x12, 4 x10",36,Motores a placas laterales (x8) y todo lo que entra por debajo de la base: cabezas al ras para no rozar el piso si se cae la oruga,Acero,0.6,,,por comprar
+"Tornillo M4 avellanado (ISO 10642): 4 x12, 2 x10",6,Postes del arma a la base y motor del arma a su soporte,Acero,1.5,,,por comprar
+"Tornillo M3 cabeza cilíndrica (ISO 4762): 6 x16, 2 x12, 4 x6, 8 x4",20,"Ángulos a placas laterales, relevador, cubierta, Freenove y L298N",Acero,0.9,,,por comprar
+Tuerca M3 de seguridad (ISO 7040),18,,Acero,0.5,,,por comprar
